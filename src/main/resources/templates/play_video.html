@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <title>播放视频测试页面</title>
+    <link rel="stylesheet"
+          href="https://g.alicdn.com/de/prismplayer/2.7.1/skins/default/aliplayer-min.css"/>
+    <script type="text/javascript"
+            src="https://g.alicdn.com/de/prismplayer/2.7.1/aliplayer-min.js"></script>
+</head>
+<body>
+<div class="prism-player" id="J_prismPlayer" style="text-align: center;position: absolute;"></div>
+</body>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  var videoId =${"videoId"};
+  var playAuth =${"playAuth"};
+  var player = new Aliplayer({
+    id: 'J_prismPlayer',
+    width: '70%',
+    autoplay: false,
+    //播放方式一：支持播放地址播放,此播放优先级最高
+    // source: '播放url',
+    //播放方式二：点播用户推荐
+    vid: videoId,
+    playauth: playAuth,
+    cover: ''
+  }, function (player) {
+    console.log('播放器创建好了。')
+  });
+  /*]]>*/
+</script>
+</html>
