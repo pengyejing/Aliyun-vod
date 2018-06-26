@@ -13,10 +13,10 @@
 <body>
 <div class="prism-player" id="J_prismPlayer" style="text-align: center;position: absolute;"></div>
 </body>
-<script th:inline="javascript">
+<script type="text/javascript" th:inline="javascript">
   /*<![CDATA[*/
-  var videoId =${"videoId"};
-  var playAuth =${"playAuth"};
+  var videoId = /*[[${videoId}]]*/;
+  var playAuth = /*[[${playAuth}]]*/;
   var player = new Aliplayer({
     id: 'J_prismPlayer',
     width: '70%',

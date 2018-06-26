@@ -1,28 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>视频测试首页</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style>
+        input {
+            height: 24px;
+        }
+    </style>
 </head>
 <body>
-<div style="text-align: center;width: 70%;">
+<div>
     <form>
-        <input type="button" id="uploadVideo" value="上传视频"/>
-        <input type="text" id="uploadVideoResult" disabled="disabled" value="视频ID："/>
-        <hr width="100%" size="5"/>
-        <input type="button" id="playAuth" value="获取上面视频的播放授权"/>
-        <input type="text" id="playAuthResult" disabled="disabled" value="视频播放授权："/>
-        <hr width="100%" size="5"/>
-        <input type="button" id="playIt" value="播放该视频"/>
+        <h2>视频上传测试</h2>
+        <p>1、上传视频，该按钮上传了一个视频，会返回视频的ID；</p>
+        <p>
+            2、获取上面视频的播放授权，该按钮可以获取上面视频的播放授权，有效时间100s，有个视频ID和播放授权，就可以点击播放按钮进入视频播放页面（如果视频没有上传完成，无法获取视频播放授权，视频比较小，等待5秒）；</p>
+        <p>3、播放该视频，进入新页面进行视频播放。</p>
+        <p>
+            <input type="button" id="uploadVideo" value="上传视频" style="width: 200px;"/>
+            <input type="text" id="uploadVideoResult" disabled="disabled" style="width: 1000px;"
+                   value="视频ID："/>
+        </p>
+        <p>
+            <input type="button" id="playAuth" value="获取上面视频的播放授权"
+                   style="width: 200px;"/>
+            <textarea id="playAuthResult" disabled="disabled" style="width: 1000px;height: 200px;">视频播放授权：</textarea>
+
+        </p>
+        <p><input type="button" id="playIt" value="播放该视频"/></p>
     </form>
 </div>
 </body>
-<script>
+<script type="text/javascript" th:inline="javascript">
+  /*<![CDATA[*/
   $(document).ready(function () {
-    var uploadVideoButton = document.getElementById('uploadVideo');
     var uploadVideoResult = document.getElementById('uploadVideoResult').value;
-    var playAuthButton = document.getElementById('playAuth');
     var playAuthResult = document.getElementById('playAuthResult').value;
     var videoId = "";
     var playAuth = "";
@@ -57,22 +71,9 @@
       })
     });
     $(document).on('click', '#playIt', function (e) {
-      var paramMap = {};
-      paramMap['videoId'] = videoId;
-      paramMap['playAuth'] = playAuth;
-      $.ajax({
-        url: '/gkiwi/vod/play_video',
-        type: 'post',
-        data: JSON.stringify(paramMap),
-        async: true,
-        contentType: 'application/json; charset=utf-8',
-        success: function (data) {
-        },
-        error: function () {
-          alert('获取视频播放授权失败，请重试！');
-        }
-      })
+      window.location.href = '/gkiwi/vod/play_video?videoId=' + videoId + '&playAuth=' + playAuth;
     })
   })
+  /*]]>*/
 </script>
 </html>
