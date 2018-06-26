@@ -13,10 +13,10 @@
 <body>
 <div>
     <form>
-        <h2>视频上传测试</h2>
+        <h2>视频上传&amp;播放测试</h2>
         <p>1、上传视频，该按钮上传了一个视频，会返回视频的ID；</p>
         <p>
-            2、获取上面视频的播放授权，该按钮可以获取上面视频的播放授权，有效时间100s，有个视频ID和播放授权，就可以点击播放按钮进入视频播放页面（如果视频没有上传完成，无法获取视频播放授权，视频比较小，等待5秒）；</p>
+            2、获取上面视频的播放授权，该按钮可以获取上面视频的播放授权，有效时间3000秒，有个视频ID和播放授权，就可以点击播放按钮进入视频播放页面（如果视频没有上传完成，无法获取视频播放授权，视频比较小，等待5秒）；</p>
         <p>3、播放该视频，进入新页面进行视频播放。</p>
         <p>
             <input type="button" id="uploadVideo" value="上传视频" style="width: 200px;"/>
@@ -71,7 +71,9 @@
       })
     });
     $(document).on('click', '#playIt', function (e) {
-      window.location.href = '/gkiwi/vod/play_video?videoId=' + videoId + '&playAuth=' + playAuth;
+      if (videoId !== "" && playAuth !== "") {
+        window.location.href = '/gkiwi/vod/play_video?videoId=' + videoId + '&playAuth=' + playAuth;
+      }
     })
   })
   /*]]>*/
